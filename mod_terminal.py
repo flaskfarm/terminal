@@ -1,15 +1,19 @@
-import traceback, threading, time
+import base64
+import fcntl
 import os
 import platform
 import pty
-import subprocess
-import base64
 import select
 import struct
-import fcntl
+import subprocess
 import termios
+import threading
+import time
+import traceback
 
 from .setup import *
+
+name = 'terminal'
 
 class ModuleTerminal(PluginModuleBase):
     pty_list = {}
@@ -17,15 +21,21 @@ class ModuleTerminal(PluginModuleBase):
 
 
     def __init__(self, P):
-        super(ModuleTerminal, self).__init__(P)
+        super(ModuleTerminal, self).__init__(P, name='terminal')
         self.route()
 
+
+    def process_menu(self, page, req):
+        arg = {'package_name': P.package_name}
+        return render_template(f'{P.package_name}_{name}.html', arg=arg)
+
+
     def route(self):
-        @P.blueprint.route('/')
-        @login_required
-        def home():
-            arg = {'package_name': P.package_name}
-            return render_template(f'{P.package_name}_terminal.html', arg=arg)
+        #@P.blueprint.route('/')
+        #@login_required
+        #def home():
+        #    arg = {'package_name': P.package_name}
+        #    return render_template(f'{P.package_name}_terminal.html', arg=arg)
 
         
         # 터미널 실행
@@ -77,8 +87,7 @@ class ModuleTerminal(PluginModuleBase):
         @F.socketio.on('resize', namespace=f'/{P.package_name}')
         def resize(data):
             try:
-                P.logger.debug('socketio: /%s, resize, %s, %s',
-                            P.package_name, request.sid, data)
+                #P.logger.debug('socketio: /%s, resize, %s, %s', P.package_name, request.sid, data)
                 fd = self.pty_list[request.sid]['master']
                 self.set_winsize(fd, data['rows'], data['cols'])
             except Exception as e:
