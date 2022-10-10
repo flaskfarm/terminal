@@ -61,7 +61,7 @@ class ModuleTerminal(PluginModuleBase):
         @F.socketio.on('disconnect', namespace=f'/{P.package_name}')
         def disconnect():
             try:
-                P.logger.debug('socketio: /%s, disconnect, %s', P.package_name, request.sid)
+                #P.logger.debug('socketio: /%s, disconnect, %s', P.package_name, request.sid)
                 popen = ModuleTerminal.pty_list[request.sid]['popen']
                 if popen.poll():
                     popen.kill()
