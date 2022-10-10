@@ -2,7 +2,7 @@ title: "터미널"
 version: "1.0.0"
 package_name: "terminal"
 developer: "joyfuI"
-description': "리눅스 전용 심플 터미널. xterm.js client"
+description: "리눅스 전용 심플 터미널. xterm.js client"
 home: "https://github.com/flaskfarm/flaskcode"
 more: "https://raw.githubusercontent.com/flaskfarm/flaskcode/main/README.md"
 
