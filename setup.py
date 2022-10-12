@@ -6,6 +6,7 @@ setting = {
     'menu': {
         'uri': __package__,
         'name': '터미널',
+        'target': '_blank',
         'list': [
             {
                 'uri': '',
