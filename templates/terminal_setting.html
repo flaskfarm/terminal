@@ -35,7 +35,7 @@ function make_list(data) {
     str += '<tr class="chover" style="cursor: pointer;" data-toggle="collapse" data-target="#collapse_' + i + '" aria-expanded="true" >';
     str += '<td scope="col" style="width:10%; text-align:center;">'+ (parseInt(i)+1) + '</td>';
     str += '<td scope="col" style="width:80%; text-align:left;">'+ data[i].title + '</td>';
-    tmp = j_button('terminal_open_btn', '실행', [{'key':'index', 'value':i}]);
+    tmp = j_button('terminal_open_btn', '실행', {'index':i});
     str += '<td scope="col" style="width:10%; text-align:center;">'+ tmp + '</td>';
     str += '</tr>';
     str += '<tr class="collapse tableRowHoverOff" style="cursor: pointer;"  id="collapse_' + i + '">';
