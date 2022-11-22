@@ -13,7 +13,7 @@ var yaml_path = "{{arg['yaml_path']}}";
 var current_data = null;
 
 $(document).ready(function(){
-  globalSendCommand('get_info', null, null, null, null, function(data){
+  globalSendCommand('get_info', null, null, null, function(data){
     make_list(data);
   });
 });
