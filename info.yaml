@@ -1,5 +1,5 @@
 title: "터미널"
-version: "1.0.0"
+version: "1.1.0"
 package_name: "terminal"
 developer: "joyful"
 description: "리눅스 전용 심플 터미널. xterm.js client"

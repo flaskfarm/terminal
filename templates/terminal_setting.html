@@ -50,30 +50,10 @@ function make_list(data) {
 }
 
 $("body").on('click', '#terminal_open_btn', function(e){
-  e.preventDefault();
-  globalSendCommand('run', $(this).data('index'), null, null, null, function(data){
+  e.stopPropagation();
+  globalSendCommand('run', $(this).data('index'), null, null, function(data){
     if (data.ret == 'success') {
-        window.open("/terminal", "_blank");
-      }
-  });
-  return;
-  index = $(this).data('index');
-  console.log(index);
-  if (index == null) {
-    window.open("/terminal", "_blank");
-  }
-
-  
-  $.ajax({
-    url: '/' + package_name + '/ajax/' + sub + '/run',
-    type: "POST", 
-    cache: false,
-    data: {index:index},
-    dataType: "json",
-    success: function (data) {
-      if (data.ret == 'success') {
-        window.open("/terminal", "_blank");
-      }
+      window.open("/terminal", "_blank");
     }
   });
 });

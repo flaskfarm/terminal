@@ -8,20 +8,20 @@ class ModuleSetting(PluginModuleBase):
     def __init__(self, P):
         super(ModuleSetting, self).__init__(P, name=name)
         self.yaml_path = os.path.join(F.config['path_data'], 'db', 'terminal.yaml')
+        self.current_info = None
 
     def process_menu(self, page, req):
         arg = {'yaml_path': self.yaml_path}
         return render_template(f'{P.package_name}_{name}.html', arg=arg)
-            
 
     def process_command(self, command, arg1, arg2, arg3, req):
         try:
             if command == 'get_info':
                 return jsonify(self.get_info())
             elif command == 'run':
-                data = self.get_info()
+                #data = self.get_info()
                 ins = P.logic.get_module('terminal')
-                ins.wait_input(data[int(arg1)]['command'])
+                ins.wait_input(self.current_info[int(arg1)]['command'])
                 return jsonify({'ret':'success'})
         except Exception as e: 
             P.logger.error(f'Exception: {str(e)}')
@@ -32,9 +32,8 @@ class ModuleSetting(PluginModuleBase):
         if os.path.exists(self.yaml_path) == False:
             with open(self.yaml_path, 'w', encoding='utf8') as f:
                 f.write(yaml_templete)
-        info = SupportYaml.read_yaml(self.yaml_path)
-        return info
-
+        self.current_info = SupportYaml.read_yaml(self.yaml_path)
+        return self.current_info
 
 
 yaml_templete = '''
